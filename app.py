@@ -75,13 +75,26 @@ def testppt():
     top = Pt(300)
     left = Pt(900)
     pic = shapes.add_picture(imagefile, left, top, height = Pt(500))
-    # title_slide_layout = prs.slide_layouts[0]
-    # slide = prs.slides.add_slide(title_slide_layout)
-    # title = slide.shapes.title
-    # subtitle = slide.placeholders[1]
+    
+    symptoms = [{"abbr":"A", "symp":"bubu"},{"abbr":"B", "symp":"bibi"},{"abbr":"CA", "symp":"lala"}]
+    rows = len(symptoms)+1
+    cols = 2
+    left = Pt(50)
+    top = Pt(650)
+    width = Pt(350)
+    height = Pt(150)
 
-    # title.text = "Hello, World!"
-    # subtitle.text = "python-pptx was here!"
+    table = shapes.add_table(rows, cols, left, top, width, height).table
+    # set column widths
+    table.columns[0].width = Pt(70)
+    table.columns[1].width = Pt(300)
+
+    table.cell(0, 0).text = 'Abbreviation'
+    table.cell(0, 1).text = 'Symptom'
+
+    for i in range(rows-1):
+        table.cell(i, 0).text = symptoms[i]['abbr']
+        table.cell(i, 1).text = symptoms[i]['symp']
 
     prs.save(out_file)
     out_file.seek(0)
