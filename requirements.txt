@@ -1,3 +1,5 @@
 Flask==1.0.2
 altair
 vega_datasets
+python-pptx
+selenium
